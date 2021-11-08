@@ -1,3 +1,7 @@
   {
-    "ecommerce": "ecommerce"
+    "ecommerce": ["https://football-mern-shop.herokuapp.com", "https://football-mern-shop.netlify.app"],
+    "faceblog": ["https://mern-faceblog.herokuapp.com", "https://faceblogv1.netlify.app"],
+    "portfolio": ["https://ridwanbinmonjur-v1.herokuapp.com", "https://ridwanbinmonjurv1.netlify.app"],
+    "events": ["https://nodejs-events-rsvps.herokuapp.com"],
+    "review": ["https://nodejs-review-app.herokuapp.com"]
   }
