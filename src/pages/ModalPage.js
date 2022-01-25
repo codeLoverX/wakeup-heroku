@@ -20,18 +20,33 @@ class ModalPage extends Component {
         }
         this.timer = this.timer.bind(this);
         this.controller = new AbortController();
+        this._componentDidMountUpdate = this._componentDidMountUpdate.bind(this);
     }
 
-
     componentDidMount() {
-        console.log({mounted: true})
+        this._componentDidMountUpdate()
+    }
+
+    componentWillReceiveProps(newProps) {
+        console.log(newProps); // data from parent received
+        this._componentDidMountUpdate()
+    }
+
+    _componentDidMountUpdate() {
+        console.log({ mounted: true })
         this.mounted = true;
         let { pathname } = this.props.location;
         pathname = pathname.substring(1)
         console.log({ pathname })
 
         if (urList[pathname]) {
-
+            let win;
+            fetch(`${urList[pathname][0]}`, {
+                signal: this.controller.signal
+            })
+            fetch(`${urList[pathname][0]}`, {
+                signal: this.controller.signal
+            })
             fetch(`${urList[pathname][0]}`, {
                 signal: this.controller.signal
             })
@@ -44,25 +59,30 @@ class ModalPage extends Component {
                     console.log(response)
                     if (urList[pathname].length === 2) {
                         console.log({ missing: urList[pathname][1] })
-                        window.location.href = urList[pathname][1]
+                        win = window.open(urList[pathname][1], "_blank");
                     }
                     else {
                         console.log({ present: urList[pathname][1] })
-                        window.location.href = urList[pathname][0]
+                        win = window.open(urList[pathname][0], "_blank");
 
                     }
+                    win.focus();
+                    history.push("/")
+
                 })
                 .catch((err) => {
                     console.log(err)
                     if (urList[pathname].length === 2) {
                         console.log({ missing: urList[pathname][1] })
-                        window.location.href = urList[pathname][1]
+                        win = window.open(urList[pathname][1], "_blank");
                     }
                     else {
                         console.log({ present: urList[pathname][1] })
-                        window.location.href = urList[pathname][0]
-
+                        win = window.open(urList[pathname][0], "_blank");
                     }
+                    win.focus();
+                    history.push("/")
+
                 })
 
             var intervalId = setInterval(this.timer, 1000);
@@ -111,6 +131,7 @@ class ModalPage extends Component {
 
         if (this.props.location !== undefined) {
             let { pathname } = this.props.location;
+            console.log({ pathname })
             pathname = pathname.substring(1)
             if (urList[pathname]) {
 

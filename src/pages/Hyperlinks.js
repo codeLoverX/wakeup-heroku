@@ -10,7 +10,7 @@ export let Hyperlinks = function () {
         {Object.keys(urList).map((value, index) => {
             return (
                 <div>
-                    <Link to={`/${value}`} >
+                    <Link to={`/${value}`}  >
                         {value}
                     </Link>
                 </div>
